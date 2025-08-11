@@ -1,0 +1,31 @@
+
+:root { --radius: 1rem; }
+* { box-sizing: border-box; }
+.app-shell { display:grid; grid-template-columns:260px 1fr; grid-template-rows:64px 1fr;
+  grid-template-areas:"sidebar topbar" "sidebar main"; min-height:100vh; }
+.sidebar{ grid-area:sidebar; }
+.topbar{ grid-area:topbar; }
+.main{ grid-area:main; }
+
+.card{ border-radius:var(--radius); background:white; box-shadow:0 6px 20px -8px rgba(0,0,0,.2); }
+.modal-backdrop{ position:fixed; inset:0; background:rgba(2,6,23,.55); display:none; align-items:center; justify-content:center; z-index:50; }
+.modal-backdrop.show{ display:flex; }
+.modal{ width:min(760px,92vw); background:white; border-radius:1rem; padding:1rem; box-shadow:0 20px 60px -10px rgba(0,0,0,.4); }
+
+.table{ width:100%; border-collapse:separate; border-spacing:0 8px; }
+.table thead th{ text-align:left; font-weight:600; font-size:.85rem; color:#334155; padding:.5rem .75rem; }
+.table tbody tr{ background:#fff; box-shadow:0 6px 16px -8px rgba(0,0,0,.15); }
+.table tbody td{ padding:.9rem .75rem; border-top:1px solid #f1f5f9; border-bottom:1px solid #f1f5f9; }
+.table tbody tr td:first-child{ border-left:1px solid #f1f5f9; border-radius:.75rem 0 0 .75rem; }
+.table tbody tr td:last-child{ border-right:1px solid #f1f5f9; border-radius:0 .75rem .75rem 0; }
+
+.calendar-grid{ display:grid; grid-template-columns:80px repeat(7,1fr); gap:8px; }
+.calendar-hour{ font-size:.75rem; color:#475569; text-align:right; padding-right:.5rem; }
+.calendar-cell{ min-height:64px; background:#f8fafc; border:1px dashed #e2e8f0; border-radius:.5rem; position:relative; }
+.event-chip{ position:absolute; left:4px; right:4px; top:4px; background:#e7f7ed; border-left:4px solid #37b06c; padding:.4rem .55rem; border-radius:.5rem; font-size:.8rem; cursor:pointer; }
+
+.live-board{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.badge{ display:inline-flex; align-items:center; gap:.4rem; padding:.2rem .5rem; border-radius:999px; background:#ecfeff; color:#155e75; font-size:.75rem; }
+.tag{ background:#eef2ff; color:#3730a3; padding:.15rem .5rem; border-radius:999px; font-size:.75rem; }
+.circle{ display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:999px; background:#e2e8f0; font-weight:700; }
+.actionbar{ display:flex; gap:.5rem; justify-content:flex-end; }
