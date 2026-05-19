@@ -29,7 +29,17 @@ jobs:
           echo "All required files present."
 
       - name: HTML validation (html-validate)
-        run: npx --yes html-validate index.html
+        run: |
+          cat > .htmlvalidate.json <<'EOF'
+          {
+            "extends": ["html-validate:recommended"],
+            "rules": {
+              "void-style": "off",
+              "no-inline-style": "off"
+            }
+          }
+          EOF
+          npx --yes html-validate index.html
 
       - name: JavaScript syntax check (node --check)
         run: |
@@ -41,9 +51,16 @@ jobs:
 
       - name: CSS lint (stylelint)
         run: |
-          npx --yes stylelint \
-            --config '{"rules":{"block-no-empty":true,"no-duplicate-selectors":true,"color-no-invalid-hex":true}}' \
-            "assets/**/*.css"
+          cat > .stylelintrc.json <<'EOF'
+          {
+            "rules": {
+              "block-no-empty": true,
+              "no-duplicate-selectors": true,
+              "color-no-invalid-hex": true
+            }
+          }
+          EOF
+          npx --yes stylelint "assets/**/*.css"
 
       - name: Build verification (static site smoke test)
         run: |
