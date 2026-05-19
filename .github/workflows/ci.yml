@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-build:
+    name: Lint and Build Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify required files exist
+        run: |
+          set -e
+          test -f index.html || (echo "index.html missing" && exit 1)
+          test -f assets/app.js || (echo "assets/app.js missing" && exit 1)
+          test -f assets/styles.css || (echo "assets/styles.css missing" && exit 1)
+          echo "All required files present."
+
+      - name: HTML validation (html-validate)
+        run: npx --yes html-validate index.html
+
+      - name: JavaScript syntax check (node --check)
+        run: |
+          set -e
+          for f in $(find assets -type f -name "*.js"); do
+            echo "Checking $f"
+            node --check "$f"
+          done
+
+      - name: CSS lint (stylelint)
+        run: |
+          npx --yes stylelint \
+            --config '{"rules":{"block-no-empty":true,"no-duplicate-selectors":true,"color-no-invalid-hex":true}}' \
+            "assets/**/*.css"
+
+      - name: Build verification (static site smoke test)
+        run: |
+          set -e
+          mkdir -p dist
+          cp -r index.html assets dist/
+          test -f dist/index.html
+          test -f dist/assets/app.js
+          test -f dist/assets/styles.css
+          echo "Static build artifact assembled successfully."
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist/
+          retention-days: 7

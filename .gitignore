@@ -1,0 +1,115 @@
+# ---------------------------------------------------------------
+# Environment variables & secrets (NEVER commit)
+# ---------------------------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.sample
+*.env
+.envrc
+secrets.*
+*.secret
+*.secrets
+credentials.json
+config.local.*
+.netrc
+
+# API keys / tokens
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# ---------------------------------------------------------------
+# Node / npm / yarn / pnpm (in case tooling is added later)
+# ---------------------------------------------------------------
+node_modules/
+jspm_packages/
+.npm
+.yarn/
+.yarn-integrity
+.pnp.*
+.pnpm-store/
+package-lock.json.bak
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ---------------------------------------------------------------
+# Build output / bundlers
+# ---------------------------------------------------------------
+dist/
+build/
+out/
+.next/
+.nuxt/
+.parcel-cache/
+.cache/
+.vite/
+.turbo/
+.svelte-kit/
+.astro/
+coverage/
+*.tsbuildinfo
+
+# ---------------------------------------------------------------
+# Logs
+# ---------------------------------------------------------------
+logs/
+*.log
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ---------------------------------------------------------------
+# Testing
+# ---------------------------------------------------------------
+.nyc_output/
+junit.xml
+test-results/
+playwright-report/
+.playwright/
+
+# ---------------------------------------------------------------
+# Editor / IDE
+# ---------------------------------------------------------------
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# ---------------------------------------------------------------
+# OS-generated files
+# ---------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---------------------------------------------------------------
+# Static site / temp / misc
+# ---------------------------------------------------------------
+tmp/
+temp/
+*.tmp
+*.bak
+*.orig
+
+# Local exported demo data
+barnpilot-demo-data.json
