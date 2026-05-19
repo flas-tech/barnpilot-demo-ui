@@ -30,14 +30,27 @@ html, body { max-width: 100%; overflow-x: clip; }
 
 .calendar-grid{ display:grid; grid-template-columns:80px repeat(7,1fr); gap:8px;
   overflow-x:auto; -webkit-overflow-scrolling:touch; }
-/* On narrow viewports give each day a usable minimum width and let the grid scroll
-   internally instead of pushing the page wide. */
+/* On narrow viewports give each day a column wide enough to show typical event
+   titles (e.g. "Lesson: Bella w/ Taylor") instead of truncating after a few
+   characters. The grid scrolls internally — the page does not. The day-name
+   header row (the .grid-cols-8 sibling immediately preceding .calendar-grid)
+   is widened to match so headers and body stay column-aligned while scrolling. */
 @media (max-width: 767.98px) {
-  .calendar-grid{ grid-template-columns:64px repeat(7, minmax(72px, 1fr)); min-width: 560px; }
+  .calendar-grid{ grid-template-columns:56px repeat(7, 120px); gap:6px; min-width: 896px; }
+  .card > .grid.grid-cols-8:has(+ .calendar-grid){
+    grid-template-columns:56px repeat(7, 120px) !important;
+    gap:6px !important; min-width: 896px;
+  }
 }
 .calendar-hour{ font-size:.75rem; color:#475569; text-align:right; padding-right:.5rem; }
 .calendar-cell{ min-height:64px; background:#f8fafc; border:1px dashed #e2e8f0; border-radius:.5rem; position:relative; }
-.event-chip{ position:absolute; left:4px; right:4px; top:4px; background:#e7f7ed; border-left:4px solid #37b06c; padding:.4rem .55rem; border-radius:.5rem; font-size:.8rem; cursor:pointer; }
+.event-chip{ position:absolute; left:4px; right:4px; top:4px; background:#e7f7ed; border-left:4px solid #37b06c; padding:.4rem .55rem; border-radius:.5rem; font-size:.8rem; cursor:pointer;
+  /* Allow up to two lines on narrow columns instead of cutting mid-word. */
+  line-height:1.2; word-break:break-word; overflow-wrap:anywhere;
+  display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; }
+@media (max-width: 767.98px) {
+  .event-chip{ padding:.35rem .45rem; font-size:.78rem; }
+}
 
 .live-board{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
 .badge{ display:inline-flex; align-items:center; gap:.4rem; padding:.2rem .5rem; border-radius:999px; background:#ecfeff; color:#155e75; font-size:.75rem; }
