@@ -93,10 +93,12 @@ test.describe("routes render without JS errors", () => {
   }
 });
 
-test.describe("desktop layout (1280x800 via desktop-chromium project)", () => {
+const DESKTOP_PROJECTS = new Set(["desktop-chromium", "desktop-firefox", "desktop-webkit"]);
+
+test.describe("desktop layout (1280x800)", () => {
   for (const route of ["#/", "#/schedule", "#/horses", "#/billing"]) {
     test(`no page horizontal overflow on ${route}`, async ({ page }, testInfo) => {
-      test.skip(testInfo.project.name !== "desktop-chromium", "desktop-only");
+      test.skip(!DESKTOP_PROJECTS.has(testInfo.project.name), "desktop-only");
       await page.goto(`/index.html${route}`);
       await page.waitForFunction(
         () => document.getElementById("app") && document.getElementById("app").children.length > 0,

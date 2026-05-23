@@ -11,10 +11,11 @@
     "lint:js": "node --check assets/app.js",
     "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
     "build:check": "node scripts/build-check.mjs",
+    "pages:check": "node scripts/pages-check.mjs",
     "serve": "python3 -m http.server 8000 --bind 127.0.0.1",
     "test:smoke": "start-server-and-test serve http://127.0.0.1:8000/index.html \"playwright test\"",
     "test": "npm run test:smoke",
-    "ci": "npm run lint && npm run build:check && npm run test:smoke"
+    "ci": "npm run lint && npm run build:check && npm run pages:check && npm run test:smoke"
   },
   "devDependencies": {
     "@playwright/test": "1.60.0",

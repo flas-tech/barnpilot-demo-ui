@@ -43,3 +43,19 @@ A fully client-side demo of BarnPilot with complete offline CRUD for core featur
 ## Data storage
 All data is stored in your browser under `localStorage` key `barnpilot_demo_state_v2`.
 To reset, use the **Reset Demo Data** button or clear browser storage.
+
+## Testing & CI
+The app itself has no build step. Tests and lints are pinned via `package.json` for reproducibility.
+
+```bash
+npm ci                                    # install pinned devDependencies
+npx playwright install chromium firefox webkit  # one-time, ~300 MB
+npm run lint                              # html-validate + stylelint + node --check
+npm run build:check                       # assembles dist/ and asserts non-empty
+npm run pages:check                       # Pages-safe deployment hardening
+npm run test:smoke                        # Playwright smoke tests across browsers
+npm run ci                                # all of the above in one go
+npm run serve                             # local dev server at http://127.0.0.1:8000
+```
+
+GitHub Actions runs `npm run ci` on every push and pull request to `main`. The smoke test covers all hash routes, asset availability, desktop layouts on Chromium/Firefox/WebKit, and the mobile (390×844) schedule view. See `.github/workflows/ci.yml`.
