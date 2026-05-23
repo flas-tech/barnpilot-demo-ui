@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@playwright/test": "1.60.0",
-    "html-validate": "10.17.0",
+    "html-validate": "11.2.0",
     "start-server-and-test": "3.0.5",
     "stylelint": "17.11.1"
   },
