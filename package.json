@@ -18,10 +18,10 @@
     "ci": "npm run lint && npm run build:check && npm run pages:check && npm run test:smoke"
   },
   "devDependencies": {
-    "@playwright/test": "1.60.0",
+    "@playwright/test": "1.61.0",
     "html-validate": "10.17.0",
-    "start-server-and-test": "3.0.5",
-    "stylelint": "17.11.1"
+    "start-server-and-test": "3.0.11",
+    "stylelint": "17.13.0"
   },
   "engines": {
     "node": ">=20"
