@@ -35,7 +35,7 @@ jobs:
 
       - name: Cache Playwright browsers
         id: pw-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.cache/ms-playwright
           key: pw-${{ runner.os }}-${{ hashFiles('package-lock.json', 'playwright.config.js') }}
